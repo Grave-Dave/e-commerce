@@ -1,0 +1,101 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Category {
+  id: Int!
+  name: String!
+  products: [Product]
+}
+
+type Payment {
+  id: Int!
+  amount: Float!
+  method: String!
+  status: String!
+  paidAt: DateTime!
+  order: Order!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: Int!
+  email: String!
+  firstName: String!
+  lastName: String!
+  phone: String!
+  avatarUrl: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  orders: [Order]
+  payments: [Payment]
+}
+
+type Order {
+  id: Int!
+  total: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+  items: [OrderItem]
+  payment: Payment
+}
+
+type OrderItem {
+  id: Int!
+  quantity: Int!
+  price: Float!
+  product: Product!
+  order: Order!
+}
+
+type Product {
+  id: Int!
+  name: String!
+  description: String!
+  price: Float!
+  stock: Int!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  category: Category!
+  orderItems: [OrderItem]
+}
+
+type AuthPayload {
+  id: Float!
+  email: String!
+  firstName: String!
+  lastName: String!
+  accessToken: String!
+}
+
+type Query {
+  products: [Product!]!
+  categories: [Category!]!
+  order: [Order!]!
+  orderItems: [OrderItem!]!
+  payments: [Payment!]!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  signIn(signInInput: SignInInput!): AuthPayload!
+}
+
+input CreateUserInput {
+  firstName: String!
+  lastName: String!
+  password: String!
+  email: String!
+  phone: String!
+  address: String!
+}
+
+input SignInInput {
+  email: String!
+  password: String!
+}
