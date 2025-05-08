@@ -32,20 +32,30 @@ export class AuthService {
 
     async generateToken(userId: number) {
         const payload: AuthJwtPayload = {sub: userId}
-        const accessToken = await this.jwtService.signAsync(payload)
-
-        return accessToken
+        return await this.jwtService.signAsync(payload)
     }
 
-    async login(user: User) {
-        const accessToken = await this.generateToken(user.id)
+    async login({id, firstName, lastName, email}: User) {
+        const accessToken = await this.generateToken(id)
 
         return {
-            id: user.id,
-            email: user.email,
-            firstName: user.firstName,
-            lastName: user.lastName,
+            id,
+            email,
+            firstName,
+            lastName,
             accessToken
         }
+    }
+
+    async validateJwtUser(userId: number) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                id: userId
+            }
+        })
+
+        if (!user) throw new UnauthorizedException("User not found")
+
+        return {id: user.id}
     }
 }
