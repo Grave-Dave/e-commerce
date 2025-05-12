@@ -87,6 +87,9 @@ Prisma.NullTypes = {
  * Enums
  */
 exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
+  ReadUncommitted: 'ReadUncommitted',
+  ReadCommitted: 'ReadCommitted',
+  RepeatableRead: 'RepeatableRead',
   Serializable: 'Serializable'
 });
 
@@ -147,6 +150,11 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
@@ -199,18 +207,17 @@ const config = {
   "datasourceNames": [
     "db"
   ],
-  "activeProvider": "sqlite",
-  "postinstall": false,
+  "activeProvider": "postgresql",
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://petshop_auvk_user:kPF0xqzzHHJlD4QYZpGATNvCQgkTC82O@dpg-d0h170ruibrs7383jvk0-a.oregon-postgres.render.com/petshop_auvk"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"sqlite\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  password  String?\n  phone     String\n  address   String\n  orders    Order[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Product {\n  id          Int         @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  stock       Int\n  category    Category    @relation(fields: [categoryId], references: [id])\n  categoryId  Int\n  createdAt   DateTime    @default(now())\n  orderItems  OrderItem[]\n}\n\nmodel Category {\n  id               Int        @id @default(autoincrement())\n  name             String\n  parentCategoryId Int?\n  parentCategory   Category?  @relation(\"ParentChild\", fields: [parentCategoryId], references: [id])\n  subCategories    Category[] @relation(\"ParentChild\")\n  products         Product[]\n}\n\nmodel Order {\n  id        Int         @id @default(autoincrement())\n  createdAt DateTime    @default(now())\n  total     Float\n  user      User        @relation(fields: [userId], references: [id])\n  userId    Int\n  items     OrderItem[]\n  payment   Payment?\n}\n\nmodel OrderItem {\n  id        Int     @id @default(autoincrement())\n  quantity  Int\n  price     Float\n  product   Product @relation(fields: [productId], references: [id])\n  productId Int\n  order     Order   @relation(fields: [orderId], references: [id])\n  orderId   Int\n}\n\nmodel Payment {\n  id      Int       @id @default(autoincrement())\n  order   Order     @relation(fields: [orderId], references: [id])\n  orderId Int       @unique\n  amount  Float\n  method  String\n  status  String\n  paidAt  DateTime?\n}\n",
-  "inlineSchemaHash": "24788fc0cbda9033852894cfa7e7e86d6af01488b1865dc49b5bcad67668bb9e",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  password  String?\n  phone     String\n  address   String\n  orders    Order[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Product {\n  id          Int         @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  stock       Int\n  category    Category    @relation(fields: [categoryId], references: [id])\n  categoryId  Int\n  createdAt   DateTime    @default(now())\n  orderItems  OrderItem[]\n}\n\nmodel Category {\n  id               Int        @id @default(autoincrement())\n  name             String\n  parentCategoryId Int?\n  parentCategory   Category?  @relation(\"ParentChild\", fields: [parentCategoryId], references: [id])\n  subCategories    Category[] @relation(\"ParentChild\")\n  products         Product[]\n}\n\nmodel Order {\n  id        Int         @id @default(autoincrement())\n  createdAt DateTime    @default(now())\n  total     Float\n  user      User        @relation(fields: [userId], references: [id])\n  userId    Int\n  items     OrderItem[]\n  payment   Payment?\n}\n\nmodel OrderItem {\n  id        Int     @id @default(autoincrement())\n  quantity  Int\n  price     Float\n  product   Product @relation(fields: [productId], references: [id])\n  productId Int\n  order     Order   @relation(fields: [orderId], references: [id])\n  orderId   Int\n}\n\nmodel Payment {\n  id      Int       @id @default(autoincrement())\n  order   Order     @relation(fields: [orderId], references: [id])\n  orderId Int       @unique\n  amount  Float\n  method  String\n  status  String\n  paidAt  DateTime?\n}\n",
+  "inlineSchemaHash": "ee8ba00d22306bdb4e3cf5dcd4950eec1151570b47f21d5c788ae64a88708c21",
   "copyEngine": true
 }
 
