@@ -7,8 +7,8 @@ const MobileNavbar = (props: Props) => {
     return (
         <div className="md:hidden">
             <SideBar
-                triggerIcon={<Bars3Icon className="w-8 cursor-pointer text-neutral-50" />}
-                triggerClassName="fixed top-4 left-4"
+                triggerIcon={<Bars3Icon className="w-8 cursor-pointer text-neutral-600" />}
+                triggerClassName="fixed top-4 left-4 z-50"
             >
                 {props.children}
             </SideBar>

@@ -1,30 +1,30 @@
 import {Injectable} from '@nestjs/common';
-import {CreateProductInput} from './dto/create-product.input';
-import {UpdateProductInput} from './dto/update-product.input';
 import {PrismaService} from "../prisma/prisma.service";
+import {DEFAULT_PAGE_COUNT} from "../constants";
 
 @Injectable()
 export class ProductService {
     constructor(private prisma: PrismaService) {
     }
 
-    // create(createProductInput: CreateProductInput) {
-    //   return 'This action adds a new product';
-    // }
-
-    async findAll() {
-        return await this.prisma.product.findMany();
+    async findAll(
+        {
+            skip = 0,
+            take = DEFAULT_PAGE_COUNT
+        }: {
+            skip?: number,
+            take?: number
+        }) {
+        return await this.prisma.product.findMany({
+            skip,
+            take,
+            include: {
+                category: true,
+            },
+        });
     }
 
-    // findOne(id: number) {
-    //   return `This action returns a #${id} product`;
-    // }
-    //
-    // update(id: number, updateProductInput: UpdateProductInput) {
-    //   return `This action updates a #${id} product`;
-    // }
-    //
-    // remove(id: number) {
-    //   return `This action removes a #${id} product`;
-    // }
+    async count() {
+        return await this.prisma.product.count()
+    }
 }

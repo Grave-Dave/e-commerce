@@ -11,12 +11,21 @@ export class ProductResolver {
     constructor(private readonly productService: ProductService) {
     }
 
-    @UseGuards(JwtAuthGuard)
+    // @UseGuards(JwtAuthGuard)
     @Query(() => [Product], {name: 'products'})
-    findAll(@Context() context) {
+    findAll(
+        @Context() context,
+        @Args('skip', {nullable: true}) skip?: number,
+        @Args('take', {nullable: true}) take?: number,
+    ) {
         const user = context.req.user
         console.log({user})
 
-        return this.productService.findAll();
+        return this.productService.findAll({skip, take});
+    }
+
+    @Query(() => Int, {name: 'productCount'})
+    count() {
+        return this.productService.count()
     }
 }

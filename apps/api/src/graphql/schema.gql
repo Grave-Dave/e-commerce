@@ -74,7 +74,8 @@ type AuthPayload {
 }
 
 type Query {
-  products: [Product!]!
+  products(skip: Float, take: Float): [Product!]!
+  productCount: Int!
   categories: [Category!]!
   order: [Order!]!
   orderItems: [OrderItem!]!
