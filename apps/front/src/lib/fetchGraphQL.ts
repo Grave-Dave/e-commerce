@@ -1,7 +1,7 @@
 
 export const fetchGraphQL = async (query: string, variables = {}) => {
 
-    const response = await fetch(`https://e-commerce-be-plc7.onrender.com/graphql`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/graphql`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

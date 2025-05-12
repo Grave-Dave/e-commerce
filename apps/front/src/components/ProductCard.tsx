@@ -4,11 +4,12 @@ type Props = {
     product: Product
 }
 const ProductCard = ({product}: Props) => {
+    const imagePath = `/images/${product.category.name}.jpg`;
     return (
         <div
             className="bg-white rounded-2xl shadow-md m-auto cursor-pointer hover:shadow-xl transition-shadow duration-300 p-4 w-full max-w-xs">
             <img
-                src={`/images/${product.category.name}.jpg`}
+                src={imagePath}
                 alt={product.name}
                 className="rounded-xl w-full h-48 object-contain mb-4"
             />
