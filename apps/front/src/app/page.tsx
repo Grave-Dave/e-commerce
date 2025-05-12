@@ -7,7 +7,7 @@ type Props = {
 }
 export default async function Home({searchParams}: Props) {
     const {page} = await searchParams;
-    const {products, totalProducts} = await fetchProducts(
+    const {products} = await fetchProducts(
         {
             page: page ? +page : undefined
         }

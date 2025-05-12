@@ -1,7 +1,6 @@
 import Link from "next/link";
 
-type Props = {}
-const Navbar = (props: Props) => {
+const Navbar = () => {
     return (
         <>
             <h1 className="text-emerald-700 text-3xl font-bold p-4 md:text-inherit md:p-2 md:transition md:duration-800">Pet e-shop</h1>
