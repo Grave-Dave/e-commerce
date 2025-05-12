@@ -1,8 +1,7 @@
-import {BACKEND_URL} from "@/lib/constants";
 
 export const fetchGraphQL = async (query: string, variables = {}) => {
 
-    const response = await fetch(`${BACKEND_URL}/graphql`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/graphql`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
