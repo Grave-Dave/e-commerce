@@ -1,6 +1,6 @@
 import Hero from "@/components/Hero";
-import Products from "@/components/Products";
 import {fetchProducts} from "@/lib/actions/postActions";
+import RandomProducts from "@/components/RandomProducts";
 
 type Props = {
     searchParams: Promise<{ [key: string]: string | string[] | undefined }>
@@ -16,11 +16,7 @@ export default async function Home({searchParams}: Props) {
     return (
         <main>
             <Hero/>
-            <Products
-                products={products}
-                // currentPage={page ? +page : 1}
-                // totalPages={Math.ceil(totalProducts / DEFAULT_PAGE_SIZE)}
-            />
+            <RandomProducts products={products}/>
         </main>
     );
 }

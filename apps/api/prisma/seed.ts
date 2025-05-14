@@ -32,7 +32,7 @@ async function main() {
     const categories = await prisma.category.findMany();
 
     //products
-    const productsData = Array.from({length: 10}).map(() => ({
+    const productsData = Array.from({length: 40}).map(() => ({
         name: faker.commerce.productName(),
         description: faker.commerce.productDescription(),
         price: parseFloat(faker.commerce.price({min: 10, max: 500})),

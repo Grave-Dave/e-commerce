@@ -9,6 +9,24 @@ import {transformTakeSkip} from "@/lib/helpers";
 export const fetchProducts = async (
     {
         page,
+        pageSize,
+        category
+    }: {
+        page?: number,
+        pageSize?: number
+        category?: string
+    }) => {
+    const {skip, take} = transformTakeSkip({page, pageSize})
+    const data = await fetchGraphQL(print(GET_PRODUCTS), {skip, take, category})
+    return {
+        products: data.products as Product[],
+        totalProducts: data.productCount
+    }
+}
+
+export const fetchProductById = async (
+    {
+        page,
         pageSize
     }: {
         page?: number,
@@ -17,7 +35,7 @@ export const fetchProducts = async (
     const {skip, take} = transformTakeSkip({page, pageSize})
     const data = await fetchGraphQL(print(GET_PRODUCTS), {skip, take})
     return {
-        products: data.products as Product[],
-        totalProducts: data.productCount
+        foodProducts: data.products as Product[],
+        totalFoodProducts: data.productCount
     }
 }

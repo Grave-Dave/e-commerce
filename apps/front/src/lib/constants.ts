@@ -1,1 +1,1 @@
-export const DEFAULT_PAGE_COUNT = 8
+export const DEFAULT_PAGE_COUNT = 10

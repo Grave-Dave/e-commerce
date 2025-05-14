@@ -1,6 +1,6 @@
 const Hero = () => {
     return (
-        <div className="bg-gradient-to-r from-emerald-600 to-emerald-200 text-white pt-24">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-200 text-white pt-16 md:pt-24">
             <div className="container justify-center mx-auto flex flex-col md:flex-row items-center flex-wrap px-16">
                 <div className="flex flex-col w-full justify-center items-center text-center lg:w-2/5 xl:items-start xl:text-left">
                     <p className="capitalize tracking-wide w-full text-xl xl:-mx-8">

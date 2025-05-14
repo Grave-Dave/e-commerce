@@ -6,7 +6,7 @@
 - Free hosting means **servers go to sleep** when not used
 - To preview the app:
     1. 👉 **[Start the backend](https://e-commerce-be-plc7.onrender.com/)** (wait ~30–60 seconds)
-    2. 👉 **[Open the frontend](https://e-commerce-fe-wh7z.onrender.com/)** (refresh if needed)
+    2. 👉 **[Open the frontend](https://e-commerce-fe-wh7z.onrender.com/)** (wait ~30–60 seconds, refresh if needed)
 
 ---
 
@@ -31,7 +31,7 @@ Wait around **30–60 seconds** until it’s fully running.
 
 ### 2. Start the Frontend
 👉 [Click here to open the app](https://e-commerce-fe-wh7z.onrender.com/)  
-If you see an error at first, just wait a bit and **refresh the page**.
+Wait around **30–60 seconds**. If you see an error at first, just wait a bit and **refresh the page**.
 
 ---
 

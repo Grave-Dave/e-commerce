@@ -1,8 +1,8 @@
 import gql from "graphql-tag"
 
 export const GET_PRODUCTS = gql`
-query products($skip: Float, $take: Float) {
-    products(skip: $skip, take: $take) {
+query products($skip: Float, $take: Float, $category: String) {
+    products(skip: $skip, take: $take, category: $category) {
         id
         name
         description
@@ -12,6 +12,6 @@ query products($skip: Float, $take: Float) {
             name
         }
     }
-    productCount
+    productCount(category: $category)
 }
 `

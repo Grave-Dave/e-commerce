@@ -17,15 +17,18 @@ export class ProductResolver {
         @Context() context,
         @Args('skip', {nullable: true}) skip?: number,
         @Args('take', {nullable: true}) take?: number,
+        @Args('category', {nullable: true}) category?: string,
     ) {
         const user = context.req.user
         console.log({user})
 
-        return this.productService.findAll({skip, take});
+        return this.productService.findAll({skip, take, category});
     }
 
     @Query(() => Int, {name: 'productCount'})
-    count() {
-        return this.productService.count()
+    count(
+        @Args('category', {nullable: true}) category?: string,
+    ) {
+        return this.productService.count({category})
     }
 }

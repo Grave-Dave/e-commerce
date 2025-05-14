@@ -10,21 +10,68 @@ export class ProductService {
     async findAll(
         {
             skip = 0,
-            take = DEFAULT_PAGE_COUNT
+            take = DEFAULT_PAGE_COUNT,
+            category = ''
         }: {
             skip?: number,
             take?: number
+            category?: string
         }) {
-        return await this.prisma.product.findMany({
-            skip,
-            take,
-            include: {
-                category: true,
-            },
-        });
+        switch (category) {
+            case 'Accessories': {
+                return await this.prisma.product.findMany({
+                    skip,
+                    take,
+                    where: {
+                        OR: [
+                            {category: {name: "Beds"}},
+                            {category: {name: "Leashes"}},
+                        ],
+                    },
+                    include: {
+                        category: true,
+                    },
+                });
+            }
+            default: {
+                return await this.prisma.product.findMany({
+                    skip,
+                    take,
+                    where: {
+                        category: category ? {name: category} : undefined,
+                    },
+                    include: {
+                        category: true,
+                    },
+                });
+            }
+        }
     }
 
-    async count() {
-        return await this.prisma.product.count()
+    async count(
+        {
+            category
+        }: {
+            category?: string
+        }) {
+        switch (category) {
+            case 'Accessories': {
+                return await this.prisma.product.count({
+                    where: {
+                        OR: [
+                            {category: {name: "Beds"}},
+                            {category: {name: "Leashes"}},
+                        ],
+                    }
+                });
+            }
+            default: {
+                return await this.prisma.product.count({
+                    where: {
+                        category: category ? {name: category} : undefined,
+                    },
+                })
+            }
+        }
     }
 }

@@ -36,7 +36,7 @@ export default function ProductCarousel({products}: Props) {
                 >
                     {products.map((product, i) => (
                         <div key={`product ${i + 1}`} className="min-w-[240px]">
-                            <ProductCard product={product}/>
+                            <ProductCard {...product}/>
                         </div>
                     ))}
                 </div>

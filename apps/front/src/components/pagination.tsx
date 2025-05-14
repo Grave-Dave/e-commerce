@@ -37,9 +37,9 @@ const Pagination = ({
             {pageNumbers.map((page, index) => (
                 <button
                     key={index}
-                    className={cn("px-3 py-1 rounded-md transition hover:text-sky-600", {
+                    className={cn("px-3 py-1 rounded-md transition hover:text-emerald-600", {
                         "bg-slate-200": currentPage !== page && page !== "...",
-                        "bg-blue-500 text-white": currentPage === page,
+                        "bg-emerald-500 text-white": currentPage === page,
                         "cursor-not-allowed": page === "...",
                     })}
                 >
