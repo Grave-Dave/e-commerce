@@ -1,4 +1,3 @@
-import {use} from "react";
 import {fetchProductById} from "@/lib/actions/postActions";
 import ProductPageContent from "@/app/product/[id]/components/ProductPageContent";
 
