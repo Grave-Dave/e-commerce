@@ -2,9 +2,8 @@ import {fetchProductById} from "@/lib/actions/postActions";
 import ProductPageContent from "@/app/product/[id]/components/ProductPageContent";
 
 type Props = {
-    params: {
-        id: string
-    }
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+    params: { id: string }
 }
 
 const ProductPage = async ({params}: Props) => {
