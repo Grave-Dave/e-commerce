@@ -8,7 +8,7 @@ type Props = {
 }
 
 const ProductPage = async ({params}: Props) => {
-    const productId = (await params).id
+    const productId = (params).id
     const product = await fetchProductById(+productId)
 
     return (
