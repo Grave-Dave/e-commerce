@@ -4,7 +4,7 @@ import ProductCarousel from "@/components/ProductCarousel";
 type Props = {
     products: Product[]
 }
-const Products = (props: Props) => {
+const RandomProducts = (props: Props) => {
 
     return (
         <section>
@@ -18,4 +18,4 @@ const Products = (props: Props) => {
     )
 }
 
-export default Products
+export default RandomProducts

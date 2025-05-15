@@ -1,0 +1,8 @@
+2025-05-15T07:58:16.733238Z  WARN turborepo_filewatch: failed to remove cookie file failed to remove file `C:\ApplockerDeveloper\PhpstormProjects\Nest-Next\.turbo\cookies\.turbo-cookie`
+2025-05-15T07:58:16.815155Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T07:59:21.490509Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T12:19:46.608162Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T12:19:46.614006Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T16:05:02.622794Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T16:05:02.964044Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running
+2025-05-15T16:05:36.145676Z  WARN daemon_server: turborepo_lib::commands::daemon: daemon already running

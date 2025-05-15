@@ -48,12 +48,7 @@ export class ProductService {
         }
     }
 
-    async count(
-        {
-            category
-        }: {
-            category?: string
-        }) {
+    async count(category?: string) {
         switch (category) {
             case 'Accessories': {
                 return await this.prisma.product.count({
@@ -73,5 +68,16 @@ export class ProductService {
                 })
             }
         }
+    }
+
+    async findOne(id: number) {
+        return await this.prisma.product.findFirst({
+            where: {
+                id
+            },
+            include: {
+                category: true,
+            },
+        })
     }
 }

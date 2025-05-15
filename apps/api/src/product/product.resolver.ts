@@ -29,6 +29,11 @@ export class ProductResolver {
     count(
         @Args('category', {nullable: true}) category?: string,
     ) {
-        return this.productService.count({category})
+        return this.productService.count(category)
+    }
+
+    @Query(() => Product)
+    getProductById(@Args("id", {type: () => Int}) id: number) {
+        return this.productService.findOne(id)
     }
 }

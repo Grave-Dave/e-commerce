@@ -15,9 +15,6 @@ const FoodPage = async ({searchParams}: Props) => {
         }
     )
 
-    console.log(products)
-
-
     return (
         <Products
             products={products}

@@ -1,0 +1,18 @@
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import SignInForm from "@/app/auth/signin/components/SignInForm";
+
+const SignInPage = () => {
+    return (
+        <div className=" bg-white p-8 border rounded-md gap-3 shadow-md w-96 flex flex-col justify-center mt-16 md:mt-20">
+            <h1 className="text-center text-2xl font-bold mb-4">Sign In Page</h1>
+            <SignInForm />
+            <Link className="flex justify-center pt-4" href={"/auth/forgot"}>Forgot Your Password?</Link>
+            <Button className="text-white cursor-pointer font-semibold px-4 my-4 rounded-xl bg-gradient-to-r from-[#FBBC05] via-[#4285F4] to-[#34A853] hover:opacity-90 transition">
+                <a href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`}>Sign In With Google</a>
+            </Button>
+        </div>
+    );
+};
+
+export default SignInPage;

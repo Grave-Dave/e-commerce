@@ -19,11 +19,12 @@ export const metadata: Metadata = {
     description: "Dawid Grabarz Hobby full-stack app",
 };
 
-export default function RootLayout({
-                                       children,
-                                   }: Readonly<{
-    children: React.ReactNode;
-}>) {
+export default function RootLayout(
+    {
+        children,
+    }: Readonly<{
+        children: React.ReactNode;
+    }>) {
     return (
         <html lang="en">
         <body
