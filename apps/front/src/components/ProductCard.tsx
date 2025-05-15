@@ -31,7 +31,7 @@ const ProductCard = (
     }, []);
 
     useEffect(() => {
-        cart.length && localStorage.setItem('cart', JSON.stringify(cart));
+        if (cart.length) localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
     const addToCart = () => {

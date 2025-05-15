@@ -15,7 +15,6 @@ type Props = {
 const ProductPageContent = ({product}: Props) => {
 
     const {
-        id,
         category,
         name,
         description,
