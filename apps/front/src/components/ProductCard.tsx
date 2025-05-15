@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import {OrderItem, Product} from "@/lib/types/modelTypes";
-import {getImagePath} from "@/lib/utils";
+import {addItemsToCart, getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
 import {useEffect, useState} from "react";
 
 type Props = Partial<Product>
@@ -27,15 +27,7 @@ const ProductCard = (
     } as Product
 
     useEffect(() => {
-        const stored = localStorage.getItem('cart');
-        if (stored) {
-            try {
-                setCart(JSON.parse(stored));
-            } catch (err) {
-                console.error('Failed to load cart', err);
-                setCart([]);
-            }
-        }
+        setCart(retrieveCartFromLocalStorage())
     }, []);
 
     useEffect(() => {
@@ -43,14 +35,8 @@ const ProductCard = (
     }, [cart]);
 
     const addToCart = () => {
-        if (id && stock) {
-            setCart([...cart, {
-                product,
-                quantity: 1,
-                price
-            }]);
-            alert(`1 item added to cart!`);
-        }
+        const newCart = addItemsToCart(product, cart)
+        if (newCart) setCart(newCart)
     };
 
     return (

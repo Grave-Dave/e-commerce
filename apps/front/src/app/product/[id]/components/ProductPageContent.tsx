@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import {Button} from '@/components/ui/button';
 import {Card, CardContent} from '@/components/ui/card';
-import {getImagePath} from "@/lib/utils";
+import {addItemsToCart, getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
 import {OrderItem, Product} from "@/lib/types/modelTypes";
 
 type Props = {
@@ -27,15 +27,7 @@ const ProductPageContent = ({product}: Props) => {
     const [cart, setCart] = useState<Partial<OrderItem>[]>([]);
 
     useEffect(() => {
-        const stored = localStorage.getItem('cart');
-        if (stored) {
-            try {
-                setCart(JSON.parse(stored));
-            } catch (err) {
-                console.error('Failed to load cart', err);
-                setCart([]);
-            }
-        }
+        setCart(retrieveCartFromLocalStorage())
     }, []);
 
     useEffect(() => {
@@ -43,18 +35,8 @@ const ProductPageContent = ({product}: Props) => {
     }, [cart]);
 
     const addToCart = () => {
-        if (id && stock) {
-            if (quantity > 0 && quantity <= stock) {
-                setCart([...cart, {
-                    product,
-                    quantity,
-                    price
-                }]);
-                alert(`${quantity} item(s) added to cart!`);
-            } else {
-                alert('Please select a valid quantity.');
-            }
-        }
+        const newCart = addItemsToCart(product, cart, quantity)
+        if (newCart) setCart(newCart)
     };
 
     return (

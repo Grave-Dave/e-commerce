@@ -4,7 +4,7 @@ import {useEffect, useState} from "react";
 import Image from 'next/image';
 import {Minus, Plus, Trash2} from 'lucide-react';
 import {OrderItem} from "@/lib/types/modelTypes";
-import {getImagePath} from "@/lib/utils";
+import {getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
 import cart from "../../../public/images/empty-cart.png"
 
 const CartPage = () => {
@@ -12,14 +12,7 @@ const CartPage = () => {
     const [cartItems, setCartItems] = useState<Partial<OrderItem>[]>([]);
 
     useEffect(() => {
-        const stored = localStorage.getItem("cart");
-        if (stored) {
-            try {
-                setCartItems(JSON.parse(stored));
-            } catch (e) {
-                console.error("Invalid cart data", e);
-            }
-        }
+        setCartItems(retrieveCartFromLocalStorage())
     }, []);
 
     const subtotal = cartItems.reduce((acc, item) => {
