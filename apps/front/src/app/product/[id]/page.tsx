@@ -1,14 +1,14 @@
+import {use} from "react";
 import {fetchProductById} from "@/lib/actions/postActions";
 import ProductPageContent from "@/app/product/[id]/components/ProductPageContent";
 
 type Props = {
-    searchParams: Promise<{ [key: string]: string | string[] | undefined }>
-    params: { id: string }
+    params: Promise<{ id: string }>
 }
 
 const ProductPage = async ({params}: Props) => {
-    const productId = (params).id
-    const product = await fetchProductById(+productId)
+    const { id } = await params;
+    const product = await fetchProductById(+id)
 
     return (
         <ProductPageContent product={product}/>
