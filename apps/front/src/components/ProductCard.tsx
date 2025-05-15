@@ -1,9 +1,9 @@
 "use client"
 
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import {OrderItem, Product} from "@/lib/types/modelTypes";
 import {addItemsToCart, getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
-import {useEffect, useState} from "react";
 
 type Props = Partial<Product>
 const ProductCard = (
@@ -34,7 +34,9 @@ const ProductCard = (
         if (cart.length) localStorage.setItem('cart', JSON.stringify(cart));
     }, [cart]);
 
-    const addToCart = () => {
+    const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        e.preventDefault();
         const newCart = addItemsToCart(product, cart)
         if (newCart) setCart(newCart)
     };
