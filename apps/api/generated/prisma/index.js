@@ -191,6 +191,14 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "windows"
       }
     ],
     "previewFeatures": [],
@@ -198,7 +206,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": null,
+    "rootEnvPath": "../../.env",
     "schemaEnvPath": "../../.env"
   },
   "relativePath": "../../prisma",
@@ -208,16 +216,17 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
+  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://petshop_auvk_user:kPF0xqzzHHJlD4QYZpGATNvCQgkTC82O@dpg-d0h170ruibrs7383jvk0-a.oregon-postgres.render.com/petshop_auvk"
+        "value": null
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  password  String?\n  phone     String\n  address   String\n  orders    Order[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Product {\n  id          Int         @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  stock       Int\n  category    Category    @relation(fields: [categoryId], references: [id])\n  categoryId  Int\n  createdAt   DateTime    @default(now())\n  orderItems  OrderItem[]\n}\n\nmodel Category {\n  id               Int        @id @default(autoincrement())\n  name             String\n  parentCategoryId Int?\n  parentCategory   Category?  @relation(\"ParentChild\", fields: [parentCategoryId], references: [id])\n  subCategories    Category[] @relation(\"ParentChild\")\n  products         Product[]\n}\n\nmodel Order {\n  id        Int         @id @default(autoincrement())\n  createdAt DateTime    @default(now())\n  total     Float\n  user      User        @relation(fields: [userId], references: [id])\n  userId    Int\n  items     OrderItem[]\n  payment   Payment?\n}\n\nmodel OrderItem {\n  id        Int     @id @default(autoincrement())\n  quantity  Int\n  price     Float\n  product   Product @relation(fields: [productId], references: [id])\n  productId Int\n  order     Order   @relation(fields: [orderId], references: [id])\n  orderId   Int\n}\n\nmodel Payment {\n  id      Int       @id @default(autoincrement())\n  order   Order     @relation(fields: [orderId], references: [id])\n  orderId Int       @unique\n  amount  Float\n  method  String\n  status  String\n  paidAt  DateTime?\n}\n",
-  "inlineSchemaHash": "ee8ba00d22306bdb4e3cf5dcd4950eec1151570b47f21d5c788ae64a88708c21",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"debian-openssl-3.0.x\", \"windows\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  firstName String\n  lastName  String\n  email     String   @unique\n  password  String?\n  phone     String\n  address   String\n  orders    Order[]\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Product {\n  id          Int         @id @default(autoincrement())\n  name        String\n  description String\n  price       Float\n  stock       Int\n  category    Category    @relation(fields: [categoryId], references: [id])\n  categoryId  Int\n  createdAt   DateTime    @default(now())\n  orderItems  OrderItem[]\n}\n\nmodel Category {\n  id               Int        @id @default(autoincrement())\n  name             String\n  parentCategoryId Int?\n  parentCategory   Category?  @relation(\"ParentChild\", fields: [parentCategoryId], references: [id])\n  subCategories    Category[] @relation(\"ParentChild\")\n  products         Product[]\n}\n\nmodel Order {\n  id        Int         @id @default(autoincrement())\n  createdAt DateTime    @default(now())\n  total     Float\n  user      User        @relation(fields: [userId], references: [id])\n  userId    Int\n  items     OrderItem[]\n  payment   Payment?\n}\n\nmodel OrderItem {\n  id        Int     @id @default(autoincrement())\n  quantity  Int\n  price     Float\n  product   Product @relation(fields: [productId], references: [id])\n  productId Int\n  order     Order   @relation(fields: [orderId], references: [id])\n  orderId   Int\n}\n\nmodel Payment {\n  id      Int       @id @default(autoincrement())\n  order   Order     @relation(fields: [orderId], references: [id])\n  orderId Int       @unique\n  amount  Float\n  method  String\n  status  String\n  paidAt  DateTime?\n}\n",
+  "inlineSchemaHash": "5d715d77dc3cf48058235d950ea2a51deaff5db26e3c6e4e0a4b133aa8098e44",
   "copyEngine": true
 }
 
@@ -258,6 +267,10 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "generated/prisma/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "generated/prisma/libquery_engine-debian-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "generated/prisma/schema.prisma")
