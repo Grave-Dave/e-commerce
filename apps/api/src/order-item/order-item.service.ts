@@ -8,23 +8,8 @@ export class OrderItemService {
 
   constructor(private prisma: PrismaService) {
   }
-  // create(createOrderItemInput: CreateOrderItemInput) {
-  //   return 'This action adds a new orderItem';
-  // }
 
   async findAll() {
     return await this.prisma.orderItem.createMany();
   }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} orderItem`;
-  // }
-  //
-  // update(id: number, updateOrderItemInput: UpdateOrderItemInput) {
-  //   return `This action updates a #${id} orderItem`;
-  // }
-  //
-  // remove(id: number) {
-  //   return `This action removes a #${id} orderItem`;
-  // }
 }

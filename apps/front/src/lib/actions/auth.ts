@@ -52,28 +52,28 @@ export async function signIn(
             errors: validatedFields.error.flatten().fieldErrors
         }
 
-    const data = await fetchGraphQL(print(SIGN_IN_MUTATION), {
-        input: {
-            ...validatedFields.data
-        }
-    })
+    try {
+        const data = await fetchGraphQL(print(SIGN_IN_MUTATION), {
+            input: {...validatedFields.data},
+        });
 
-    if (data.errors) return {
-        data: Object.fromEntries(formData.entries()),
-        message: "Invalid credentials",
-    };
-
-    await createSession(
-        {
-            user: {
-                id: data.signIn.id,
-                firstName: data.signIn.firstName,
-                lastName: data.signIn.lastName,
-                email: data.signIn.email,
-            },
-            accessToken: data.signIn.accessToken
-        }
-    )
+        await createSession(
+            {
+                user: {
+                    id: data.signIn.id,
+                    firstName: data.signIn.firstName,
+                    lastName: data.signIn.lastName,
+                    email: data.signIn.email,
+                },
+                accessToken: data.signIn.accessToken
+            }
+        )
+    } catch (error) {
+        return {
+            data: Object.fromEntries(formData.entries()),
+            message: "Invalid credentials",
+        };
+    }
 
     revalidatePath("/")
     redirect("/")

@@ -8,28 +8,8 @@ import { UpdateOrderItemInput } from './dto/update-order-item.input';
 export class OrderItemResolver {
   constructor(private readonly orderItemService: OrderItemService) {}
 
-  // @Mutation(() => OrderItem)
-  // createOrderItem(@Args('createOrderItemInput') createOrderItemInput: CreateOrderItemInput) {
-  //   return this.orderItemService.create(createOrderItemInput);
-  // }
-
   @Query(() => [OrderItem], { name: 'orderItems' })
   findAll() {
     return this.orderItemService.findAll();
   }
-
-  // @Query(() => OrderItem, { name: 'orderItem' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.orderItemService.findOne(id);
-  // }
-  //
-  // @Mutation(() => OrderItem)
-  // updateOrderItem(@Args('updateOrderItemInput') updateOrderItemInput: UpdateOrderItemInput) {
-  //   return this.orderItemService.update(updateOrderItemInput.id, updateOrderItemInput);
-  // }
-  //
-  // @Mutation(() => OrderItem)
-  // removeOrderItem(@Args('id', { type: () => Int }) id: number) {
-  //   return this.orderItemService.remove(id);
-  // }
 }

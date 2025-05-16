@@ -1,25 +1,13 @@
 "use client"
-import {PropsWithChildren, useEffect, useState} from "react";
+import {PropsWithChildren} from "react";
 import {usePathname} from "next/navigation";
 import {cn} from "@/lib/utils";
+import {useScroll} from "@/lib/hooks/useScroll";
 
 type Props = PropsWithChildren
 const DesktopNavbar = (props: Props) => {
-    const [scrollPosition, setScrollPosition] = useState(0);
     const pathname = usePathname();
-
-    const handleScroll = () => {
-        setScrollPosition(window.scrollY);
-    };
-
-    useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
-        return () => {
-            window.removeEventListener("scroll", handleScroll);
-        };
-    });
-
-    const isScrollDown = scrollPosition > 10;
+    const {isScrollDown} = useScroll();
     const isHome = pathname === "/";
 
     return (
@@ -34,7 +22,7 @@ const DesktopNavbar = (props: Props) => {
             <div className="flex items-center px-4 py-4 container md:py-2">
                 {props.children}
             </div>
-            <hr className="border-b border-gray-100 opacity-25" />
+            <hr className="border-b border-gray-100 opacity-25"/>
         </nav>
     )
 }

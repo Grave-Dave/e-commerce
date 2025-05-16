@@ -83,6 +83,7 @@ const CartPage = () => {
             </div>
 
             <div className="mt-6 text-right">
+                {/*todo: implement PaymentPage */}
                 <button
                     onClick={() => alert('Payment will be added soon.')}
                     className="bg-emerald-600 cursor-pointer text-white px-6 py-3 rounded-xl hover:bg-emerald-800 transition">

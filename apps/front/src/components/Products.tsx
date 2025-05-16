@@ -9,10 +9,10 @@ type Props = {
     totalPages: number;
 }
 const Products = ({products, currentPage, totalPages}: Props) => {
-
+    // todo: add sorting
     return (
-        <section className="mb-4">
-            <h2 className="text-3xl font-bold text-center text-gray-500 leading-tight mt-2 pt-16 md:pt-24">
+        <section className="pb-4">
+            <h2 className="text-3xl font-bold text-center text-gray-500 leading-tight pt-16 md:pt-24">
                 {getCategoryName(products)}
             </h2>
             <div

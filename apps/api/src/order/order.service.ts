@@ -7,23 +7,7 @@ import {PrismaService} from "../prisma/prisma.service";
 export class OrderService {
   constructor(private prisma: PrismaService) {
   }
-  // create(createOrderInput: CreateOrderInput) {
-  //   return 'This action adds a new order';
-  // }
-
   async findAll() {
     return await this.prisma.order.findMany();
   }
-
-  // findOne(id: number) {
-  //   return `This action returns a #${id} order`;
-  // }
-  //
-  // update(id: number, updateOrderInput: UpdateOrderInput) {
-  //   return `This action updates a #${id} order`;
-  // }
-  //
-  // remove(id: number) {
-  //   return `This action removes a #${id} order`;
-  // }
 }
