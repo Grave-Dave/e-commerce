@@ -1,4 +1,4 @@
-import {Product} from "@/lib/types/modelTypes";
+import { Product} from "@/lib/types/modelTypes";
 import ProductCard from "@/components/ProductCard";
 import Pagination from "@/components/pagination";
 import {getCategoryName} from "@/lib/utils";

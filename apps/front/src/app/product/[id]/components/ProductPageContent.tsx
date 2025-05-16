@@ -1,12 +1,13 @@
 "use client"
 
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Image from 'next/image';
 
 import {Button} from '@/components/ui/button';
 import {Card, CardContent} from '@/components/ui/card';
-import {addItemsToCart, getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
-import {OrderItem, Product} from "@/lib/types/modelTypes";
+import {getImagePath} from "@/lib/utils";
+import {Product} from "@/lib/types/modelTypes";
+import {useCartContext} from "@/lib/CartContext";
 
 type Props = {
     product: Product
@@ -23,20 +24,7 @@ const ProductPageContent = ({product}: Props) => {
     } = product;
 
     const [quantity, setQuantity] = useState(1);
-    const [cart, setCart] = useState<Partial<OrderItem>[]>([]);
-
-    useEffect(() => {
-        setCart(retrieveCartFromLocalStorage())
-    }, []);
-
-    useEffect(() => {
-        if (cart.length) localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
-
-    const addToCart = () => {
-        const newCart = addItemsToCart(product, cart, quantity)
-        if (newCart) setCart(newCart)
-    };
+    const {addToCart} = useCartContext();
 
     return (
         <section className="min-h-screen flex items-center justify-center px-4 pt-16 md:pt-20 bg-gray-50">
@@ -68,7 +56,7 @@ const ProductPageContent = ({product}: Props) => {
                         />
                     </div>
 
-                    <Button onClick={addToCart}
+                    <Button onClick={() => addToCart(product, quantity)}
                             className="w-full bg-emerald-600 hover:bg-emerald-800 cursor-pointer md:w-auto">
                         Add to Cart
                     </Button>

@@ -5,8 +5,9 @@ import { redirect } from "next/navigation";
 
 export type SessionUser = {
     id?: string;
-    name?: string;
-    avatar?: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
 };
 
 export type Session = {

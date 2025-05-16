@@ -1,9 +1,10 @@
 "use client"
 
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Link from "next/link";
-import {OrderItem, Product} from "@/lib/types/modelTypes";
-import {addItemsToCart, getImagePath, retrieveCartFromLocalStorage} from "@/lib/utils";
+import {Product} from "@/lib/types/modelTypes";
+import {getImagePath} from "@/lib/utils";
+import {useCartContext} from "@/lib/CartContext";
 
 type Props = Partial<Product>
 const ProductCard = (
@@ -16,7 +17,6 @@ const ProductCard = (
         price
     }: Props) => {
 
-    const [cart, setCart] = useState<Partial<OrderItem>[]>([]);
     const product = {
         id,
         category,
@@ -26,20 +26,14 @@ const ProductCard = (
         price
     } as Product
 
-    useEffect(() => {
-        setCart(retrieveCartFromLocalStorage())
-    }, []);
+    const {addToCart} = useCartContext();
 
-    useEffect(() => {
-        if (cart.length) localStorage.setItem('cart', JSON.stringify(cart));
-    }, [cart]);
-
-    const addToCart = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.stopPropagation();
-        e.preventDefault();
-        const newCart = addItemsToCart(product, cart)
-        if (newCart) setCart(newCart)
-    };
+    const addItemToCart =
+        (e: React.MouseEvent<HTMLButtonElement>) => {
+            e.stopPropagation();
+            e.preventDefault();
+            addToCart(product)
+        }
 
     return (
         <Link href={`/product/${id}`}>
@@ -68,7 +62,7 @@ const ProductCard = (
                 </p>
 
                 <button
-                    onClick={addToCart}
+                    onClick={addItemToCart}
                     className="w-full cursor-pointer bg-amber-500 hover:bg-amber-600 text-white font-medium py-2 px-4 rounded-lg transition duration-300"
                 >
                     Add to Cart

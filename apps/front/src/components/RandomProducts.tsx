@@ -8,7 +8,7 @@ const RandomProducts = (props: Props) => {
 
     return (
         <section>
-            <h2 className="text-3xl font-bold text-center text-gray-500 leading-tight mt-2">
+            <h2 className="text-3xl font-bold text-center text-gray-500 leading-tight mx-4 mt-2">
                 Check out these products!
             </h2>
             <div

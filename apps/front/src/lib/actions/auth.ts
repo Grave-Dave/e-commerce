@@ -1,13 +1,14 @@
 "use server"
 
-import {redirect} from "next/navigation";
 import {print} from "graphql"
+import {redirect} from "next/navigation";
+import {revalidatePath} from "next/cache";
 import {SignUpFormState} from "@/lib/types/formState";
 import {SignUpFormSchema} from "@/lib/zodSchemas/signUpFormSchema";
 import {fetchGraphQL} from "@/lib/fetchGraphQL";
 import {CREATE_USER_MUTATION, SIGN_IN_MUTATION} from "@/lib/gqlQueries";
 import {SignInFormSchema} from "@/lib/zodSchemas/signInFormSchema";
-import {revalidatePath} from "next/cache";
+import {createSession} from "@/lib/session";
 
 export async function signUp(
     state: SignUpFormState,
@@ -62,7 +63,18 @@ export async function signIn(
         message: "Invalid credentials",
     };
 
-    //todo create a session
+    await createSession(
+        {
+            user: {
+                id: data.signIn.id,
+                firstName: data.signIn.firstName,
+                lastName: data.signIn.lastName,
+                email: data.signIn.email,
+            },
+            accessToken: data.signIn.accessToken
+        }
+    )
+
     revalidatePath("/")
     redirect("/")
 }
