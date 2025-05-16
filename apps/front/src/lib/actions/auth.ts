@@ -69,6 +69,7 @@ export async function signIn(
             }
         )
     } catch (error) {
+        console.log(`SignIn error: ${error}`)
         return {
             data: Object.fromEntries(formData.entries()),
             message: "Invalid credentials",
