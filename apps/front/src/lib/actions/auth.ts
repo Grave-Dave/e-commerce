@@ -24,16 +24,19 @@ export async function signUp(
             errors: validatedFields.error.flatten().fieldErrors
         }
 
-    const data = await fetchGraphQL(print(CREATE_USER_MUTATION), {
-        input: {
-            ...validatedFields.data
-        }
-    })
+    try {
+        await fetchGraphQL(print(CREATE_USER_MUTATION), {
+            input: {...validatedFields.data},
+        });
 
-    if (data.errors) return {
-        data: Object.fromEntries(formData.entries()),
-        message: "Something went wrong",
-    };
+    } catch (error) {
+        console.log(`SignIn error: ${error}`)
+        return {
+            data: Object.fromEntries(formData.entries()),
+            message: error?.toString() ?? "Something went wrong",
+        };
+    }
+
     redirect("/auth/signin")
 }
 
