@@ -5,6 +5,7 @@ import {SignInInput} from "./dto/signin.input";
 import {JwtService} from "@nestjs/jwt";
 import {AuthJwtPayload} from "./types/auth-jwtPayload";
 import {User} from "../user/entities/user.entity";
+import {CreateUserInput} from "../user/dto/create-user.input";
 
 @Injectable()
 export class AuthService {
@@ -35,7 +36,7 @@ export class AuthService {
         return await this.jwtService.signAsync(payload)
     }
 
-    async login({id, firstName, lastName, email}: User) {
+    async login({id, firstName, lastName, email, avatar}: User) {
         const accessToken = await this.generateToken(id)
 
         return {
@@ -43,6 +44,7 @@ export class AuthService {
             email,
             firstName,
             lastName,
+            avatar,
             accessToken
         }
     }
@@ -57,5 +59,27 @@ export class AuthService {
         if (!user) throw new UnauthorizedException("User not found")
 
         return {id: user.id}
+    }
+
+    async validateGoogleUser(googleUser: CreateUserInput) {
+        const user = await this.prisma.user.findUnique({
+            where: {
+                email: googleUser.email
+            }
+        })
+
+        if (user) {
+            const {password, ...authUser} = user
+            return authUser
+        }
+
+        const dbUser = await this.prisma.user.create({
+            data: {
+                ...googleUser
+            }
+        })
+
+        const {password, ...authUser} = dbUser
+        return authUser
     }
 }

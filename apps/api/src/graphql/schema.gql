@@ -28,7 +28,7 @@ type User {
   firstName: String!
   lastName: String!
   phone: String!
-  avatarUrl: String
+  avatar: String
   createdAt: DateTime!
   updatedAt: DateTime!
   orders: [Order]
@@ -70,6 +70,7 @@ type AuthPayload {
   email: String!
   firstName: String!
   lastName: String!
+  avatar: String
   accessToken: String!
 }
 
@@ -95,6 +96,7 @@ input CreateUserInput {
   email: String!
   phone: String!
   address: String!
+  avatar: String
 }
 
 input SignInInput {

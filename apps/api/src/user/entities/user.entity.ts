@@ -19,8 +19,8 @@ export class User {
     @Field()
     phone: string;
 
-    @Field({nullable: true})
-    avatarUrl?: string;
+    @Field(() => String, {nullable: true})
+    avatar: string | null;
 
     @Field(() => Date)
     createdAt: Date;

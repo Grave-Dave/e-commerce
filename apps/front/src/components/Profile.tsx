@@ -8,7 +8,7 @@ import {Avatar} from "@radix-ui/react-avatar";
 import {ArrowRightStartOnRectangleIcon} from "@heroicons/react/20/solid";
 import {cn} from "@/lib/utils";
 import {useScroll} from "@/lib/hooks/useScroll";
-import {AvatarFallback} from "./ui/avatar";
+import {AvatarFallback, AvatarImage} from "./ui/avatar";
 import {PopoverContent, PopoverTrigger} from "./ui/popover";
 
 type Props = {
@@ -22,7 +22,12 @@ const Profile = ({user}: Props) => {
     return (
         <Popover>
             <PopoverTrigger className="cursor-pointer">
-                <Avatar>
+                <Avatar className="flex items-center md:block">
+                    <AvatarImage
+                        className="rounded-full w-10 mx-3 border-2 border-white md:w-12 md:mx-0"
+                        src={user.avatar}
+                    />
+                    <p className="block md:hidden">User</p>
                     <AvatarFallback
                         className="bg-transparent p-2 transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-emerald-500">
                         <User className={cn("text-white w-8 h-8 transition duration-600 ease-in-out",

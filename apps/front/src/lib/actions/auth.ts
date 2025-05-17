@@ -67,6 +67,7 @@ export async function signIn(
                     firstName: data.signIn.firstName,
                     lastName: data.signIn.lastName,
                     email: data.signIn.email,
+                    avatar: data.signIn.avatar,
                 },
                 accessToken: data.signIn.accessToken
             }

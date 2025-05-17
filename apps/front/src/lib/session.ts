@@ -8,6 +8,7 @@ export type SessionUser = {
     firstName?: string;
     lastName?: string;
     email?: string;
+    avatar?: string;
 };
 
 export type Session = {

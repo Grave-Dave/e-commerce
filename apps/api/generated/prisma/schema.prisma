@@ -20,6 +20,7 @@ model User {
   password  String?
   phone     String
   address   String
+  avatar    String?
   orders    Order[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

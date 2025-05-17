@@ -14,6 +14,9 @@ export class AuthPayload {
     @Field()
     lastName: string
 
+    @Field({ nullable: true })
+    avatar: string;
+
     @Field()
     accessToken: string
 }

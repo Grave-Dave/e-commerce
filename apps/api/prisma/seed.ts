@@ -11,6 +11,7 @@ async function main() {
         lastName: faker.person.lastName(),
         email: faker.internet.email(),
         phone: faker.phone.number(),
+        avatar: faker.image.avatar(),
         address: faker.location.streetAddress()
     }))
 
