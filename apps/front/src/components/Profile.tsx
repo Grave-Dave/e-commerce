@@ -27,13 +27,15 @@ const Profile = ({user}: Props) => {
                         className="rounded-full w-10 mx-3 border-2 border-white md:w-12 md:mx-0"
                         src={user.avatar}
                     />
-                    <p className="block md:hidden">User</p>
+                    {user.avatar && <p className="block md:hidden">User</p>}
                     <AvatarFallback
-                        className="bg-transparent p-2 transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-emerald-500">
-                        <User className={cn("text-white w-8 h-8 transition duration-600 ease-in-out",
-                            {
-                                "text-black w-8 h-8": isScrollDown || !isHome,
-                            })}/>
+                        className="bg-transparent pl-2 py-1 justify-start transition duration-300 transform hover:-translate-y-1 hover:shadow-md hover:bg-emerald-500 md:p-2">
+                        <User
+                            className={cn("text-black md:text-white w-6 h-6 md:w-8 md:h-8 transition duration-600 ease-in-out",
+                                {
+                                    "md:text-black md:w-8 md:h-8": isScrollDown || !isHome,
+                                })}/>
+                        {!user.avatar && <p className="block ml-3 md:hidden">User</p>}
                     </AvatarFallback>
                 </Avatar>
             </PopoverTrigger>

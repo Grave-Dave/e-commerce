@@ -12,7 +12,7 @@ const SignInPage = () => {
             <p className="flex justify-center">or</p>
             <Button
                 className="text-white cursor-pointer font-semibold px-4 my-4 rounded-xl bg-gradient-to-r from-[#FBBC05] via-[#4285F4] to-[#34A853] hover:opacity-90 transition">
-                <a href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`}>Sign In With Google</a>
+                <a className="w-full" href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google/login`}>Sign In With Google</a>
             </Button>
         </div>
     );
