@@ -1,9 +1,9 @@
-import { createSession } from "@/lib/session";
-import { redirect } from "next/navigation";
-import { NextResponse } from "next/server";
+import {createSession} from "@/lib/session";
+import {redirect} from "next/navigation";
+import {NextRequest} from "next/server";
 
-export async function GET(req: NextResponse) {
-    const { searchParams } = new URL(req.url);
+export async function GET(req: NextRequest) {
+    const {searchParams} = new URL(req.url);
 
     const accessToken = searchParams.get("accessToken");
     const userId = searchParams.get("userId");
